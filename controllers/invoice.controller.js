@@ -13,15 +13,42 @@ const createInvoice = async (req, res, next) => {
   try {
     const body = req.body;
     const accessToken = (await getTokenForXero())?.access_token; // get access token
-    const productResponse = await getProductByIdInStore(
-      body["contact[product_name]"]
+
+    const productNamesAndBeddingTypes = Object.keys(body)
+      .filter((key) => key.startsWith("contact[product_name]_"))
+      .map((key) => {
+        const index = key.split("]_")[1];
+        console.log(index);
+        return {
+          name: body[key],
+          beddingType: body[`contact[bedding_type]_${index}`],
+          color: body[`contact[color]_${index}`],
+          qty: body[`contact[quantity]_${index}`],
+        };
+      });
+
+    const selectedVarient = await Promise.all(
+      productNamesAndBeddingTypes.map(async (product) => {
+        const productResponse = await getProductByIdInStore(product.name);
+        return {
+          ...productResponse.product.variants.find(
+            (variant) =>
+              variant.option1 === product.beddingType &&
+              variant.option2 === product.color
+          ),
+          productName: productResponse.product.title,
+        };
+      })
     );
 
-    const selectedVarient = productResponse.product.variants.find(
-      (item) =>
-        item.option1 == body["contact[bedding_type]"] &&
-        item.option2 == body["contact[color]"]
-    );
+    if (selectedVarient.some((value) => !value)) {
+      res
+        .status(400)
+        .json({ message: "Product & Selected variants not available" });
+      return;
+    }
+
+    console.log("selectedVarient", selectedVarient);
 
     const contactBody = {
       Name:
@@ -57,6 +84,17 @@ const createInvoice = async (req, res, next) => {
       accessToken
     );
 
+    const lineItems = selectedVarient.map((itemProduct, key) => {
+      return {
+        Description: `${itemProduct.productName} / ${itemProduct.title}`,
+        Quantity: body[`contact[quantity]_${key + 1}`],
+        UnitAmount: itemProduct ? itemProduct.price : "",
+        AccountCode: "215",
+      };
+    });
+
+    console.log(lineItems);
+
     // Construct the quote payload
     const quoteData = {
       Type: "ACCREC",
@@ -68,15 +106,8 @@ const createInvoice = async (req, res, next) => {
       Reference: body["contact[ndis_participant_number]"],
       CurrencyCode: "AUD",
       Comments: body["contact[Comments]"],
-      LineItems: [
-        {
-          Description: `${productResponse?.product?.title} / ${body["contact[bedding_type]"]} / ${body["contact[color]"]}`,
-          Quantity: body["contact[quantity]"],
-          UnitAmount: selectedVarient ? selectedVarient.price : "",
-          AccountCode: "215",
-        },
-      ],
-      Title: `Quote for ${productResponse?.product?.title}`,
+      LineItems: lineItems,
+      Title: `Quote for (${body["contact[lead_type]"]})`,
       Summary: body["contact[Comments]"],
       Terms: "Quote is valid for 7 days",
       Status: "SENT",

@@ -11,7 +11,7 @@ const getProductByIdInStore = async (id) => {
             },
           });
   
-      console.log("PRODUCT LIST ------- ", productResponse.data);
+      // console.log("PRODUCT LIST ------- ", productResponse.data);
   
       return productResponse.data;
     } catch (e) {

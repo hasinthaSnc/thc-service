@@ -111,6 +111,7 @@ const createInvoice = async (req, res, next) => {
       Summary: body["contact[Comments]"],
       Terms: "Quote is valid for 7 days",
       Status: "SENT",
+      LineAmountTypes: "Inclusive"
     };
 
     const quoteResponse = await createQuoteInXero(quoteData, accessToken);

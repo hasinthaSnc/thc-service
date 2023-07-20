@@ -96,6 +96,8 @@ const createInvoice = async (req, res, next) => {
     console.log(lineItems);
 
     // Construct the quote payload
+
+    const summery = `Comments: \n ${body["contact[Comments]"]} \n\n Support Coordinator: ${body["contact[support_coordinator]"]} \n Participant’s Date of Birth: ${body["contact[participant_date_of_birth]"]} \n Participant’s Representative Name: ${body["contact[participant_representative_name]"]} \n Contact No: ${body["contact[phone_number]"]}`
     const quoteData = {
       Type: "ACCREC",
       Contact: {
@@ -108,7 +110,7 @@ const createInvoice = async (req, res, next) => {
       Comments: body["contact[Comments]"],
       LineItems: lineItems,
       Title: `Quote for (${body["contact[lead_type]"]})`,
-      Summary: body["contact[Comments]"],
+      Summary: summery,
       Terms: "Quote is valid for 7 days",
       Status: "SENT",
       LineAmountTypes: "Inclusive"

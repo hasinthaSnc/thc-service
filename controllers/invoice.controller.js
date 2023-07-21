@@ -132,11 +132,11 @@ const createInvoice = async (req, res, next) => {
 
     // const emailResponse = await sendInvoiceEmailByXero(invoiceID, accessToken); //send email
 
-    res.status(200).json({ message: "success" });
+    return res.status(200).json({ message: "success", response: quoteResponse });
   } catch (error) {
     // Handle any errors that occurred
     console.error("Error creating invoice:", error);
-    res.status(500).json({ message: "An error occurred" });
+    return res.status(500).json({ message: "An error occurred" });
   }
 };
 

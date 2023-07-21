@@ -141,11 +141,11 @@ app.post("/submit-form", async (req, res) => {
 
     console.log("EMIAL SENT ----- ", emailResponse.data);
 
-    res.status(200).json({ message: "success" });
+    return res.status(200).json({ message: "success" });
   } catch (error) {
     // Handle any errors that occurred
     console.error("Error creating invoice:", error);
-    res.status(500).json({ message: "An error occurred" });
+    return res.status(500).json({ message: "An error occurred" });
   }
 });
 
@@ -171,10 +171,10 @@ app.post("/get-token", async (req, res) => {
     // Handle the Xero API response
     if (response.status === 200) {
       // Invoice created successfully
-      res.status(200).json(response.data);
+      return res.status(200).json(response.data);
     } else {
       // Error creating the invoice
-      res.status(500).json(response.data);
+      return res.status(500).json(response.data);
     }
 
     res.status(201).json(response);
@@ -304,7 +304,7 @@ app.get("/email", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
- res.json("THE THC RUNNING FINE")
+ return res.json("THE THC RUNNING FINE")
 });
 
 app.use("/lad-collective", invoiceRoute);

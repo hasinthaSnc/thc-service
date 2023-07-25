@@ -304,7 +304,7 @@ app.get("/email", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE")
+ return res.json("THE THC RUNNING FINE V2")
 });
 
 app.use("/lad-collective", invoiceRoute);

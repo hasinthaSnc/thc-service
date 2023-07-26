@@ -33,8 +33,8 @@ const createInvoice = async (req, res, next) => {
         return {
           ...productResponse.product.variants.find(
             (variant) =>
-              variant.option1 === product.beddingType &&
-              variant.option2 === product.color
+              (variant.option1 === product.beddingType  || variant.option2 === product.beddingType) &&
+              (variant.option2 === product.color || variant.option3 === product.color)
           ),
           productName: productResponse.product.title,
         };

@@ -62,8 +62,8 @@ app.post("/submit-form", async (req, res) => {
 
     const selectedVarient = productResponse.data.product.variants.find(
       (item) =>
-        item.option1 == body["contact[bedding_type]"] &&
-        item.option2 == body["contact[color]"]
+        item.option1 == body["contact[bedding_type]"] || item.option2 == body["contact[bedding_type]"] &&
+        item.option2 == body["contact[color]"] || item.option3 == body["contact[color]"]
     );
 
     const contactBody = {
@@ -262,7 +262,7 @@ app.post("/get-products", async (req, res) => {
     // });
 
     const response = await axios.get(
-      "https://the-lad-collective.myshopify.com/admin/api/2023-07/products/7240175517743.json",
+      "https://the-lad-collective.myshopify.com/admin/api/2023-07/products/7284925988911.json",
       {
         headers: {
           "X-Shopify-Access-Token": `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`,

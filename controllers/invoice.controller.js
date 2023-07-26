@@ -33,8 +33,10 @@ const createInvoice = async (req, res, next) => {
         return {
           ...productResponse.product.variants.find(
             (variant) =>
-              (variant.option1 === product.beddingType  || variant.option2 === product.beddingType) &&
-              (variant.option2 === product.color || variant.option3 === product.color)
+              (variant.option1 === product.beddingType ||
+                variant.option2 === product.beddingType) &&
+              (variant.option2 === product.color ||
+                variant.option3 === product.color)
           ),
           productName: productResponse.product.title,
         };
@@ -97,7 +99,25 @@ const createInvoice = async (req, res, next) => {
 
     // Construct the quote payload
 
-    const summery = `Comments: \n ${body["contact[Comments]"]} \n\n Support Coordinator: ${body["contact[support_coordinator]"]} \n Participant’s Date of Birth: ${body["contact[participant_date_of_birth]"]} \n Participant’s Representative Name: ${body["contact[participant_representative_name]"]} \n Contact No: ${body["contact[phone_number]"]}`
+    const summery = `Comments: \n ${
+      body["contact[Comments]"] ? body["contact[Comments]"] : "-"
+    } \n\n Support Coordinator: ${
+      body["contact[support_coordinator]"]
+        ? body["contact[support_coordinator]"]
+        : "Not Given"
+    } \n Participant’s Date of Birth: ${
+      body["contact[participant_date_of_birth]"]
+        ? body["contact[participant_date_of_birth]"]
+        : "Not Given"
+    } \n Participant’s Representative Name: ${
+      body["contact[participant_representative_name]"]
+        ? body["contact[participant_representative_name]"]
+        : "-"
+    } \n Contact No: ${
+      body["contact[phone_number]"]
+        ? body["contact[phone_number]"]
+        : "Not Given"
+    }`;
     const quoteData = {
       Type: "ACCREC",
       Contact: {
@@ -105,34 +125,23 @@ const createInvoice = async (req, res, next) => {
       },
       Date: moment().format("YYYY-MM-DD"),
       ExpiryDate: moment().add(7, "day").format("YYYY-MM-DD"),
-      Reference: body["contact[ndis_participant_number]"],
+      Reference: body["contact[ndis_participant_number]"]
+        ? body["contact[ndis_participant_number]"]
+        : "",
       CurrencyCode: "AUD",
-      Comments: body["contact[Comments]"],
+      Comments: body["contact[Comments]"] ? body["contact[Comments]"] : "-",
       LineItems: lineItems,
       Title: `Quote for (${body["contact[lead_type]"]})`,
       Summary: summery,
       Terms: "Quote is valid for 7 days",
       Status: "SENT",
-      LineAmountTypes: "Inclusive"
+      LineAmountTypes: "Inclusive",
     };
 
     const quoteResponse = await createQuoteInXero(quoteData, accessToken);
-    // const invoiceID = invoiceResponse?.Invoices[0].InvoiceID;
-
-    // const invoiceForUpdate = {
-    //   Invoices: [
-    //     {
-    //       InvoiceID: invoiceID,
-    //       Notes: body["contact[Comments]"],
-    //       Comments: body["contact[Comments]"],
-    //     },
-    //   ],
-    // };
-    // await updateInvoiceInXero(invoiceForUpdate, invoiceID, accessToken);
-
-    // const emailResponse = await sendInvoiceEmailByXero(invoiceID, accessToken); //send email
-
-    return res.status(200).json({ message: "success", response: quoteResponse });
+    return res
+      .status(200)
+      .json({ message: "success", response: quoteResponse });
   } catch (error) {
     // Handle any errors that occurred
     console.error("Error creating invoice:", error);

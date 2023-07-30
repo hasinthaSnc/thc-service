@@ -56,9 +56,7 @@ const createInvoice = async (req, res, next) => {
       Name:
         body["contact[first_name]"] +
         " " +
-        body["contact[last_name]"] +
-        " " +
-        " + Testing",
+        body["contact[last_name]"],
       FirstName: body["contact[first_name]"],
       LastName: body["contact[last_name]"],
       EmailAddress: body["contact[participant_email]"],

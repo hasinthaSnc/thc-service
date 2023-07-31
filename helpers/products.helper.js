@@ -1,7 +1,8 @@
 const { default: axios } = require("axios");
+require('dotenv').config();
 
 const getProductByIdInStore = async (id) => {
-    const accessToken = "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"
+    const accessToken = process.env.SHOPIFY_TOKEN
     const productApiUrl = `https://the-lad-collective.myshopify.com/admin/api/2023-07/products/${id}.json`;
     try {
         const productResponse = await axios.get(productApiUrl, {

@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const getProductByIdInStore = async (id) => {
     const accessToken = process.env.SHOPIFY_TOKEN
+    console.log(accessToken)
     const productApiUrl = `https://the-lad-collective.myshopify.com/admin/api/2023-07/products/${id}.json`;
     try {
         const productResponse = await axios.get(productApiUrl, {

@@ -1,5 +1,8 @@
 const { createContactInXero } = require("../helpers/contact.helper");
-const { sendInvoiceEmailByXero } = require("../helpers/email.helper");
+const {
+  sendInvoiceEmailByXero,
+  sendCustomEmail,
+} = require("../helpers/email.helper");
 const {
   createInvoiceInXero,
   updateInvoiceInXero,
@@ -10,8 +13,8 @@ const { getTokenForXero } = require("../helpers/token.helper");
 const moment = require("moment");
 
 const createInvoice = async (req, res, next) => {
+  const body = req.body;
   try {
-    const body = req.body;
     const accessToken = (await getTokenForXero())?.access_token; // get access token
 
     const productNamesAndBeddingTypes = Object.keys(body)
@@ -53,10 +56,7 @@ const createInvoice = async (req, res, next) => {
     console.log("selectedVarient", selectedVarient);
 
     const contactBody = {
-      Name:
-        body["contact[first_name]"] +
-        " " +
-        body["contact[last_name]"],
+      Name: body["contact[first_name]"] + " " + body["contact[last_name]"],
       FirstName: body["contact[first_name]"],
       LastName: body["contact[last_name]"],
       EmailAddress: body["contact[participant_email]"],
@@ -143,7 +143,16 @@ const createInvoice = async (req, res, next) => {
   } catch (error) {
     // Handle any errors that occurred
     console.error("Error creating invoice:", error);
-    return res.status(500).json({ message: "An error occurred" });
+    sendCustomEmail(body)
+      .then((emailRes) => {
+        if (emailRes.accepted?.length > 0)
+          return res.status(200).json({ message: "Email Sent" });
+
+        return res.status(500).json({ message: "Error creating invoice" });
+      })
+      .catch(() => {
+        return res.status(500).json({ message: "Error creating invoice" });
+      });
   }
 };
 

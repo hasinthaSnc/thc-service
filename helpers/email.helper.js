@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const nodemailer = require("nodemailer");
+const { EMAIL, EMAIL_PASS } = require("../config/const");
 
 const sendInvoiceEmailByXero = async (invoiceId, accessToken) => {
   const emailUrl = `https://api.xero.com/api.xro/2.0/Invoices/${invoiceId}/Email`;
@@ -19,56 +20,34 @@ const sendInvoiceEmailByXero = async (invoiceId, accessToken) => {
   }
 };
 
-const sendCustomEmail = async () => {
+const sendCustomEmail = async (data) => {
   console.log("Called")
-
-  const pdfResponse = await axios.post('https://api.xero.com/api.xro/2.0/Invoice/Quotes', quote, { headers, responseType: 'arraybuffer' })
-
   try {
+    const tableRows = Object.entries(data)
+    .map(([key, value]) => {
+      // Remove "contact" from the key for the first column
+      const columnHeader = key.replace("contact[", "").replace("]", "");
+      return `<tr><td style="font-weight: bold; padding: 5px;">${columnHeader}</td><td style="padding: 5px;">${value}</td></tr>`;
+    })
+    .join("");
+
+  const tableHTML = `<p>Service is currently down. We apologize for the inconvenience. Here is the submitted details from NDIS</p> <br /> <hr>`+`<table style="border-collapse: collapse; width: 100%; max-width: 500px; margin: 0 auto; font-size: 14px; border: 1px solid #ccc;">${tableRows}</table>`;
+
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "hasinthasupernicecrunch@gmail.com",
-        pass: "qyigkhnqcykpiicz",
+        user: EMAIL,
+        pass: EMAIL_PASS,
       },
     });
 
     let mailOptions = {
-      from: "hasinthasupernicecrunch@gmail.com",
-      to: "hasintha.doluweera@gmail.com",
-      subject: "Sending email with attachments",
-      text: "Please see the attached files.",
-      html: `
-      <h2>Invoice</h2>
-      <p>Dear recipient,</p>
-      <p>Please find attached the invoice for your recent purchase.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Product 1</td>
-            <td>2</td>
-            <td>$10</td>
-          </tr>
-          <tr>
-            <td>Product 2</td>
-            <td>1</td>
-            <td>$20</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>Total: $30</p>
-      <p>Thank you for your business.</p>
-    `,
+      from: EMAIL,
+      to: ["chloe@theladcollective.com", EMAIL],
+      subject: data["contact[lead_type]"] ? `${data["contact[lead_type]"]} - ${data["contact[first_name]"]}` : "Quote Submitted",
+      html: tableHTML,
     };
     let info = await transporter.sendMail(mailOptions);
-    console.log("Message sent: %s", info);
     return info;
   } catch (e) {
     console.log(e)

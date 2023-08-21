@@ -265,7 +265,7 @@ app.post("/get-products", async (req, res) => {
       "https://the-lad-collective.myshopify.com/admin/api/2023-07/products/7284925988911.json",
       {
         headers: {
-          "X-Shopify-Access-Token": `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`,
+          "X-Shopify-Access-Token": `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`,
           "Content-Type": "application/json",
         },
       }

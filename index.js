@@ -13,6 +13,7 @@ const { getTokenForXero } = require("./helpers/token.helper");
 const clientId = "018C140070D64007B9D6466F7076B798";
 const clientSecret = "lH-IGXBgXqr5pBpnvrMGfz8OocVyx65c84OAlbxVTb_PfX8D";
 const tokenUrl = "https://identity.xero.com/connect/token"; // Replace with the appropriate Xero API endpoint
+require('dotenv').config();
 
 // for parsing application/json
 app.use(bodyParser.json());
@@ -265,7 +266,7 @@ app.post("/get-products", async (req, res) => {
       "https://the-lad-collective.myshopify.com/admin/api/2023-07/products/7284925988911.json",
       {
         headers: {
-          "X-Shopify-Access-Token": `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`,
+          "X-Shopify-Access-Token": process.env.SHOPIFY_TOKEN,
           "Content-Type": "application/json",
         },
       }

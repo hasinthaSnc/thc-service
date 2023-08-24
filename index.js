@@ -10,6 +10,8 @@ const invoiceRoute = require("./routes/invoice.route");
 const { sendCustomEmail } = require("./helpers/email.helper");
 const { getQuoteInXero } = require("./helpers/quote.helper");
 const { getTokenForXero } = require("./helpers/token.helper");
+const amazoneRoute = require("./routes/amazon.route");
+const { logger } = require("./helpers/logger.helper");
 const clientId = "018C140070D64007B9D6466F7076B798";
 const clientSecret = "lH-IGXBgXqr5pBpnvrMGfz8OocVyx65c84OAlbxVTb_PfX8D";
 const tokenUrl = "https://identity.xero.com/connect/token"; // Replace with the appropriate Xero API endpoint
@@ -304,11 +306,17 @@ app.get("/email", async (req, res) => {
   }
 });
 
+app.post("/", async (req, res) => {
+  logger.info(JSON.stringify(req?.body))
+  return res.json("ORDER REQUEST")
+ });
+
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V2.6")
+ return res.json("THE THC RUNNING FINE V3.0")
 });
 
 app.use("/lad-collective", invoiceRoute);
+app.use("/lad-collective", amazoneRoute);
 
 // Start the server
 app.listen(4000, () => {

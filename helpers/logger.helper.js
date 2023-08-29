@@ -1,7 +1,8 @@
 const winston = require('winston');
 
-// Define log file location
+// Define log file locations
 const logFilePath = 'logs/app.log';
+const errorLogFilePath = 'logs/error.log'; // New error log file
 
 // Create a Winston logger instance
 const logger = winston.createLogger({
@@ -14,10 +15,14 @@ const logger = winston.createLogger({
   ),
   transports: [
     new winston.transports.Console(), // Log to console
-    new winston.transports.File({ filename: logFilePath }) // Log to file
+    new winston.transports.File({ filename: logFilePath }), // Log to main file
+    new winston.transports.File({
+      filename: errorLogFilePath,
+      level: 'error' // Only log messages with level 'error' to this file
+    }) // Log errors to error file
   ]
 });
 
 module.exports = {
-    logger
-  };
+  logger
+};

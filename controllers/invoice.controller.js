@@ -7,6 +7,7 @@ const {
   createInvoiceInXero,
   updateInvoiceInXero,
 } = require("../helpers/invoice.helper");
+const { logger } = require("../helpers/logger.helper");
 const { getProductByIdInStore } = require("../helpers/products.helper");
 const { createQuoteInXero } = require("../helpers/quote.helper");
 const { getTokenForXero } = require("../helpers/token.helper");
@@ -142,7 +143,7 @@ const createInvoice = async (req, res, next) => {
       .json({ message: "success", response: quoteResponse });
   } catch (error) {
     // Handle any errors that occurred
-    console.error("Error creating invoice:", error);
+    logger.error(JSON.stringify(error))
     sendCustomEmail(body)
       .then((emailRes) => {
         if (emailRes.accepted?.length > 0)

@@ -155,7 +155,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V3.0")
+ return res.json("THE THC RUNNING FINE V3.1")
 });
 
 app.use("/lad-collective", invoiceRoute);

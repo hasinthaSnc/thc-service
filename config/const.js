@@ -17,6 +17,47 @@ const STRINGS = {
     EMAIL_MSG_SERVER_ERROR: 'the fulfillment of this order through Amazon Seller Central is currently impeded due to a server error. This has resulted in the unavailability of Shopify product SKUs within the Amazon Seller Central system, contributing to the existing fulfillment challenge.'
 }
 
+const sampleData = {
+    mondatData: [
+        {
+          "PO Number": 42542,
+          "Product Name/ID": "Test",
+          "Stage": "Test",
+          "Start Date": "2023-08-31",
+          "Expected Completion Date": "2023-08-31",
+          "Actual Completion Date": "2023-08-31",
+          "Status": "Test",
+          "Notes/Comments": "Test",
+          "Materials/Colorways": "Test",
+          "Invoice/Quotation Details": "Test"
+        },
+        {
+          "PO Number": 21314,
+          "Product Name/ID": "Test",
+          "Stage": "Test",
+          "Start Date": "2023-08-31",
+          "Expected Completion Date": "2023-08-31",
+          "Actual Completion Date": "2023-08-31",
+          "Status": "Pass",
+          "Notes/Comments": "Test",
+          "Materials/Colorways": "Test",
+          "Invoice/Quotation Details": "Test"
+        },
+        {
+          "PO Number": "Ref9210",
+          "Product Name/ID": "Name changed",
+          "Stage": "Weving",
+          "Start Date": "2023-08-31",
+          "Expected Completion Date": "2023-08-31",
+          "Actual Completion Date": "2023-08-31",
+          "Status": "Pass",
+          "Notes/Comments": "No notes",
+          "Materials/Colorways": "no",
+          "Invoice/Quotation Details": "no"
+        }
+      ]
+}
+
 module.exports = {
     SHOPIFY_TOKEN,
     EMAIL_PASS,
@@ -29,5 +70,6 @@ module.exports = {
     AMAZON_SA_ENDPOINT,
     MARKETPLACE_ID,
     US_SHOPIFY_TOKEN,
-    STRINGS
+    STRINGS,
+    sampleData
 }

@@ -13,6 +13,7 @@ const { getTokenForXero } = require("./helpers/token.helper");
 const amazoneRoute = require("./routes/amazon.route");
 const { logger } = require("./helpers/logger.helper");
 const { changeOrderFullfillmentStatus, getOrderById, getOrderList } = require("./helpers/order.helper");
+const mondatRoute = require("./routes/monday.route");
 const clientId = "018C140070D64007B9D6466F7076B798";
 const clientSecret = "lH-IGXBgXqr5pBpnvrMGfz8OocVyx65c84OAlbxVTb_PfX8D";
 const tokenUrl = "https://identity.xero.com/connect/token"; // Replace with the appropriate Xero API endpoint
@@ -160,7 +161,7 @@ app.get("/", async (req, res) => {
 
 app.use("/lad-collective", invoiceRoute);
 app.use("/lad-collective", amazoneRoute);
-
+app.use("/lad-collective", mondatRoute);
 // Start the server
 app.listen(4000, () => {
   console.log("Server started on port 4000");

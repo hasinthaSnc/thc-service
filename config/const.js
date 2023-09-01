@@ -11,6 +11,7 @@ const AMAZON_STS_SECRET_KEY = process.env.AMAZON_STS_SECRET_KEY
 const AMAZON_TOKEN_URL = process.env.AMAZON_TOKEN_URL
 const AMAZON_SA_ENDPOINT = process.env.AMAZON_SA_ENDPOINT
 const MARKETPLACE_ID = process.env.MARKETPLACE_ID
+const MONDAY_AUTH_TOKEN = process.env.MONDAY_AUTH_TOKEN
 
 const STRINGS = {
     EMAIL_MSG_NO_SKU_AVAILABLE: 'The fulfillment of this order within Amazon Seller Central has encountered an issue due to the absence of corresponding Shopify product SKUs in the Amazon Seller Central inventory. This disparity in SKUs between the two platforms has led to the current fulfillment shortfall',
@@ -20,7 +21,7 @@ const STRINGS = {
 const sampleData = {
     mondatData: [
         {
-          "PO Number": 42542,
+          "PO Number": "425421",
           "Product Name/ID": "Test",
           "Stage": "Test",
           "Start Date": "2023-08-31",
@@ -32,7 +33,7 @@ const sampleData = {
           "Invoice/Quotation Details": "Test"
         },
         {
-          "PO Number": 21314,
+          "PO Number": "2131421",
           "Product Name/ID": "Test",
           "Stage": "Test",
           "Start Date": "2023-08-31",
@@ -45,7 +46,7 @@ const sampleData = {
         },
         {
           "PO Number": "Ref9210",
-          "Product Name/ID": "Name changed",
+          "Product Name/ID": "Name changed 2",
           "Stage": "Weving",
           "Start Date": "2023-08-31",
           "Expected Completion Date": "2023-08-31",
@@ -70,6 +71,7 @@ module.exports = {
     AMAZON_SA_ENDPOINT,
     MARKETPLACE_ID,
     US_SHOPIFY_TOKEN,
+    MONDAY_AUTH_TOKEN,
     STRINGS,
     sampleData
 }

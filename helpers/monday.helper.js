@@ -32,7 +32,7 @@ async function createOrUpdateItem(data) {
 
   for (const element of data) {
     const existingItem = existingItems.find(
-      (item) => item.column_values[0].text === element["PO Number"]
+      (item) => item.column_values[0].text === element["PO Number"].toString()
     );
     let createOrUpdateItemQuery = `
       mutation {

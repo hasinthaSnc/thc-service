@@ -76,8 +76,10 @@ async function createOrUpdateItem(data) {
           },
         }
       );
-      console.log("Item created or updated:", response.data);
+      logger.info("Item created or updated: " + response.data);
+      
     } catch (error) {
+      logger.error("Error creating or updating item: " + JSON.stringify(error.response.data))
       console.error("Error creating or updating item:", error.response.data);
     }
   }

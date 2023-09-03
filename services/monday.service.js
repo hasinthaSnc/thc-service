@@ -2,6 +2,7 @@ const { createOrUpdateItem } = require("../helpers/monday.helper");
 
 const syncBoard = async (requestBody) => {
   try {
+
     const data = await createOrUpdateItem(requestBody);
 
     return {

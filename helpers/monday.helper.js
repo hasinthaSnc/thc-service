@@ -1,9 +1,9 @@
 const { default: axios } = require("axios");
 const { MONDAY_AUTH_TOKEN } = require("../config/const");
+const { logger } = require("../helpers/logger.helper");
 
 async function createOrUpdateItem(data) {
   const url = `https://api.monday.com/v2`;
-
   const existingItemsResponse = await axios.post(
     url,
     JSON.stringify({
@@ -28,12 +28,14 @@ async function createOrUpdateItem(data) {
     }
   );
 
-  const existingItems = existingItemsResponse.data.data.boards[0].items;
 
+  const existingItems = existingItemsResponse.data.data.boards[0].items;
   for (const element of data) {
+    console.log(element)
     const existingItem = existingItems.find(
       (item) => item.column_values[0].text === element["PO Number"].toString()
     );
+    
     let createOrUpdateItemQuery = `
       mutation {
         ${existingItem ? "change_multiple_column_values" : "create_item"} (
@@ -76,11 +78,11 @@ async function createOrUpdateItem(data) {
           },
         }
       );
-      logger.info("Item created or updated: " + response.data);
       
     } catch (error) {
-      logger.error("Error creating or updating item: " + JSON.stringify(error.response.data))
-      console.error("Error creating or updating item:", error.response.data);
+      console.error("Error creating or updating item:", error);
+      logger.error("Error creating or updating item: " + JSON.stringify(error))
+    
     }
   }
 

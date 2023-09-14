@@ -17,6 +17,9 @@ const mondatRoute = require("./routes/monday.route");
 const clientId = "018C140070D64007B9D6466F7076B798";
 const clientSecret = "lH-IGXBgXqr5pBpnvrMGfz8OocVyx65c84OAlbxVTb_PfX8D";
 const tokenUrl = "https://identity.xero.com/connect/token"; // Replace with the appropriate Xero API endpoint
+const { startProductSyncCron } = require("./crons/products.cron");
+const productRoute = require("./routes/products.route");
+
 require('dotenv').config();
 
 // for parsing application/json
@@ -70,7 +73,7 @@ app.post("/get-products", async (req, res) => {
   try {
 
     const response = await axios.get(
-      "https://the-lad-collective.myshopify.com/admin/api/2023-07/products/7284925988911.json",
+      "https://the-lad-collective.myshopify.com/admin/api/2023-07/products.json",
       {
         headers: {
           "X-Shopify-Access-Token": process.env.SHOPIFY_TOKEN,
@@ -83,7 +86,7 @@ app.post("/get-products", async (req, res) => {
     if (response.status === 200) {
       // Invoice created successfully
       //res.status(200).json(response.data);
-      return res.status(200).json(response.data.product);
+      return res.status(200).json(response.data.products);
       return res.redirect(
         "https://www.theladcollective.com/products/tlc-assistive-bedding-set?contact_posted=true"
       );
@@ -159,10 +162,15 @@ app.get("/", async (req, res) => {
  return res.json("THE THC RUNNING FINE V4.0 - monday integration")
 });
 
+
+
 app.use("/lad-collective", invoiceRoute);
 app.use("/lad-collective", amazoneRoute);
 app.use("/lad-collective", mondatRoute);
+app.use("/lad-collective", productRoute);
 // Start the server
 app.listen(4000, () => {
   console.log("Server started on port 4000");
+  // startProductSyncCron()
+
 });

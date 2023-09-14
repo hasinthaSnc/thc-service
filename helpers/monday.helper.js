@@ -4,7 +4,6 @@ const { logger } = require("../helpers/logger.helper");
 
 async function createOrUpdateItem(data) {
   const url = `https://api.monday.com/v2`;
-  logger.info("Google sheet data: " + JSON.stringify(data))
   const existingItemsResponse = await axios.post(
     url,
     JSON.stringify({

@@ -20,6 +20,7 @@
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "moment": "^2.29.4",
+    "node-cron": "^3.0.2",
     "nodeenv": "^3.0.75",
     "nodemailer": "^6.9.3",
     "qs": "^6.11.2",

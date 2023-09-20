@@ -64,7 +64,7 @@ const createInvoice = async (req, res, next) => {
       ContactStatus: "ACTIVE",
       Addresses: [
         {
-          AddressType: "STREET",
+          AddressType: "POBOX",
           AddressLine1: body["contact[street_address]"],
           City: body["contact[city]"],
           Region: body["contact[state_or_Region]"],

@@ -159,7 +159,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V5.1 - Bundling integration")
+ return res.json("THE THC RUNNING FINE V5.0 - Bundling integration")
 });
 
 

@@ -19,6 +19,7 @@ const clientSecret = "lH-IGXBgXqr5pBpnvrMGfz8OocVyx65c84OAlbxVTb_PfX8D";
 const tokenUrl = "https://identity.xero.com/connect/token"; // Replace with the appropriate Xero API endpoint
 const { startProductSyncCron } = require("./crons/products.cron");
 const productRoute = require("./routes/products.route");
+const emailRoute = require("./routes/email.route");
 
 require('dotenv').config();
 
@@ -159,7 +160,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V5.1 - Bundling integration")
+ return res.json("THE THC RUNNING FINE V6.0 - inquiry integration")
 });
 
 
@@ -168,6 +169,7 @@ app.use("/lad-collective", invoiceRoute);
 app.use("/lad-collective", amazoneRoute);
 app.use("/lad-collective", mondatRoute);
 app.use("/lad-collective", productRoute);
+app.use("/lad-collective", emailRoute);
 // Start the server
 app.listen(4000, () => {
   console.log("Server started on port 4000");

@@ -6,7 +6,7 @@ const sendInquiries = async (req, res, next) => {
   try {
     const body = req.body
 
-    if(!body['contact[Name]']) {
+    if(!body['contact[Name]'] || !body['contact[email]']) {
       res.status(403).json({message: "Validation Failed"})
     }
     const response = await sendInquiry(body);

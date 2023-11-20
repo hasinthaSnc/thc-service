@@ -130,6 +130,9 @@ const sendInquiryEmailForCustomer = async (customerEmail) => {
 const sendInquiryEmail = async (data) => {
   try {
 
+    delete data['utf8']
+    delete data['challenge']
+    delete data['null']
     const tableRows = Object.entries(data)
     .map(([key, value]) => {
       // Remove "contact" from the key for the first column
@@ -137,6 +140,8 @@ const sendInquiryEmail = async (data) => {
       return `<tr><td style="font-weight: bold; padding: 5px;">${columnHeader}</td><td style="padding: 5px;">${value == Boolean(true) ? "Yes" : value == Boolean(false) ? "No" : value}</td></tr>`;
     })
     .join("");
+
+
 
     const tableHTML =
     `<p>Dear Admin,</p>` +

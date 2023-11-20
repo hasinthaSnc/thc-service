@@ -18,8 +18,8 @@ const sendInquiry = async (requestBody) => {
       "null": "Submit"
   }
 
-    const data = await sendInquiryEmail(sample);
-    await sendInquiryEmailForCustomer(sample["contact[email]"]);
+    const data = await sendInquiryEmail(requestBody);
+    await sendInquiryEmailForCustomer(requestBody["contact[email]"]);
 
     return {
       code: 200,

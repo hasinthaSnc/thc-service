@@ -156,7 +156,7 @@ const sendInquiryEmail = async (data) => {
     let mailOptions = {
       from: EMAIL_2,
       to: [EMAIL_2],
-      subject: `Customer Inquiry! - Testing`,
+      subject: `Customer Inquiry! - ${data['contact[Name]']}`,
       html: tableHTML,
     };
     let info = await transporter.sendMail(mailOptions);

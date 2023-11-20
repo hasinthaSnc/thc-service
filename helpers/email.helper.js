@@ -139,9 +139,12 @@ const sendInquiryEmail = async (data) => {
     .join("");
 
     const tableHTML =
-    `<p>Inquiry from customer</p> <br /> <hr>` +
-    `<table style="border-collapse: collapse; width: 100%; max-width: 500px; margin: 0 auto; font-size: 14px; border: 1px solid #ccc;">${tableRows}</table>`;
-
+    `<p>Dear Admin,</p> <br />` +
+    `<p>We hope this message finds you well. We wanted to inform you that a new inquiry has been submitted by a customer. Below are the details of the inquiry:</p> <br />` +
+    `<table style="border-collapse: collapse; width: 100%; max-width: 500px; margin: 0 auto; font-size: 14px; border: 1px solid #ccc;">${tableRows}</table><br />` + 
+    `<p>Thank you for your prompt attention to this matter. We strive to provide excellent customer service, and your assistance in resolving this inquiry is greatly appreciated.</p> <br />`;
+    `<p>Best regards,</p> <br />`;
+    `<p>- Auto Genarated from Shopify Server</p> <br />`;
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

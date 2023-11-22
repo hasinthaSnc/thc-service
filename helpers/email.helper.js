@@ -160,7 +160,7 @@ const sendInquiryEmail = async (data) => {
 
     let mailOptions = {
       from: EMAIL_2,
-      to: ["layla@theladcollective.com", "hasinthasupernicecrunch@gmail.com"],
+      to: ["hasinthasupernicecrunch@gmail.com"],
       subject: `Customer Inquiry! - ${data['contact[Name]']}`,
       html: tableHTML,
     };

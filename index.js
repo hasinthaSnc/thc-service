@@ -160,7 +160,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V6.2 - inquiry integration")
+ return res.json("THE THC RUNNING FINE V6.3 - inquiry integration")
 });
 
 

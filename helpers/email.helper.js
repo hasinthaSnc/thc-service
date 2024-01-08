@@ -108,8 +108,8 @@ const sendInquiryEmailForCustomer = async (customerEmail) => {
     const htmlContent = `<p>G’day,</p>
     <p>Thank you for reaching out to The Lad Collective. We wanted to let you know that we've successfully received your email.
     </p>
-    <p>We are currently out of office and will return on Monday the 8th of January. Your message is very important to us and we will do our best to get back to you as soon as we can once we have returned in the New Year.Your message is very important to us and we will do our best to get back to you as soon as we can once we have returned in the New Year.</p>
-    <p>On behalf of the TLC Team, we wish you a very Merry Christmas and Happy New Year.</p>
+    <p>We are back in office from Monday the 8th of January. We are currently experiencing a high volume of enquiries and are working diligently to respond to each one as quickly and thoroughly as possible. Our commitment to providing you with the best service remains our top priority.</p>
+    <p>We appreciate your patience and understanding during this busy time. Rest assured, a member of our customer service team will be in touch with you as soon as we can.</p>
     <p>Thank you for choosing The Lad Collective. We're looking forward to assisting you!</p>
     <br>
     <p>Warm regards,<br>

@@ -25,10 +25,15 @@ require('dotenv').config();
 
 // for parsing application/json
 app.use(bodyParser.json());
-
+const allowedOrigins = [
+  "https://www.theladcollective.com",
+  "https://www.theladcollective.co.nz",
+  "https://www.theladcollective.us",
+  // Add more URLs as needed
+];
 app.use(
   cors({
-    origin: "https://www.theladcollective.com",
+    origin: allowedOrigins,
   })
 );
 
@@ -160,7 +165,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V6.5 - inquiry integration")
+ return res.json("THE THC RUNNING FINE V6.5 - cors enabled for us and nz store")
 });
 
 

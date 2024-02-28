@@ -26,9 +26,9 @@ require('dotenv').config();
 // for parsing application/json
 app.use(bodyParser.json());
 const allowedOrigins = [
-  "https://www.theladcollective.com",
-  "https://www.theladcollective.co.nz",
-  "https://www.theladcollective.us",
+  "https://theladcollective.com",
+  "https://theladcollective.co.nz",
+  "https://theladcollective.us",
   // Add more URLs as needed
 ];
 app.use(

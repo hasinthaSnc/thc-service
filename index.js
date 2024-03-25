@@ -165,7 +165,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V6.5 - cors enabled for us and nz store")
+ return res.json("THE THC RUNNING FINE V6.7 - email changes")
 });
 
 

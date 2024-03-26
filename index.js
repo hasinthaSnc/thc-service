@@ -29,6 +29,7 @@ const allowedOrigins = [
   "https://www.theladcollective.com",
   "https://theladcollective.co.nz",
   "https://theladcollective.us",
+  "https://theladcollective.com",
   // Add more URLs as needed
 ];
 app.use(

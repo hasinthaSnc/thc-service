@@ -99,7 +99,7 @@ const sendInquiryEmailForCustomer = async (customerEmail) => {
     </p>
     <p>We are currently out of office and will return on Tuesday the 2nd of April. Your message is very important to us and we will do our best to get back to you as soon as we can once we have returned from the short break.</p>
     <p>On behalf of the TLC Team, we hope you have an amazing Easter weekend.</p>
-    <p>Talk soon :blush::rabbit:</p>
+    <p>Talk soon</p>
     <br>
     <p>Warm regards,<br>
     The Lad Collective Team</p>`;

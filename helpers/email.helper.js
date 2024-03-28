@@ -101,7 +101,8 @@ const sendInquiryEmailForCustomer = async (customerEmail) => {
     <p>On behalf of the TLC Team, we hope you have an amazing Easter weekend.</p>
     <p>Talk soon</p>
     <br>
-    <p>Warm regards,<br>
+    <p>Kind regards,<br>
+    Layla,<br>
     The Lad Collective Team</p>`;
 
     // const htmlContent = `<p>G’day,</p>

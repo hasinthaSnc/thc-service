@@ -25,11 +25,13 @@ const createInvoice = async (req, res, next) => {
         console.log(index);
         return {
           name: body[key],
-          beddingType: body[`contact[bedding_type]_${index}`],
-          color: body[`contact[color]_${index}`],
-          qty: body[`contact[quantity]_${index}`],
+          beddingType: body[`contact[bedding_type]_${index}`] || body[`contact[bedding_type_${index}]`],
+          color: body[`contact[color]_${index}`] || body[`contact[color_${index}]`],
+          qty: body[`contact[quantity]_${index}`] || body[`contact[quantity_${index}]`],
         };
       });
+      console.log("productNamesAndBeddingTypes", productNamesAndBeddingTypes)
+
 
     const selectedVarient = await Promise.all(
       productNamesAndBeddingTypes.map(async (product) => {

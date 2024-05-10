@@ -34,6 +34,7 @@ const createInvoice = async (req, res, next) => {
     const selectedVarient = await Promise.all(
       productNamesAndBeddingTypes.map(async (product) => {
         const productResponse = await getProductByIdInStore(product.name);
+        console.log("productResponse", productResponse)
         return {
           ...productResponse.product.variants.find(
             (variant) =>

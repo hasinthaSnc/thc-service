@@ -86,6 +86,7 @@ const createInvoice = async (req, res, next) => {
     );
 
     const lineItems = selectedVarient.map((itemProduct, key) => {
+      console.log("itemProduct", itemProduct)
       return {
         Description: `${itemProduct.productName} / ${itemProduct.title}`,
         Quantity: body[`contact[quantity]_${key + 1}`],

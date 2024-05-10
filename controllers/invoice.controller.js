@@ -104,11 +104,7 @@ const createInvoice = async (req, res, next) => {
 
     const summery = `Comments: \n ${
       body["contact[Comments]"] ? body["contact[Comments]"] : "-"
-    } \n\n Participant’s Date of Birth: ${
-      body["contact[participant_date_of_birth]"]
-        ? body["contact[participant_date_of_birth]"]
-        : "Not Given"
-    } \n Contact No: ${
+    } \n \n Contact No: ${
       body["contact[phone_number]"]
         ? body["contact[phone_number]"]
         : "Not Given"

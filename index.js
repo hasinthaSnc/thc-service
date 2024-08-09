@@ -166,7 +166,7 @@ app.post("/", async (req, res) => {
  });
 
 app.get("/", async (req, res) => {
- return res.json("THE THC RUNNING FINE V7 - ndis changes")
+ return res.json("THE THC RUNNING FINE V8 - email inquiry email changed")
 });
 
 

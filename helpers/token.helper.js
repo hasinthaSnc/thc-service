@@ -12,7 +12,10 @@ const getTokenForXero = async () => {
 
     const tokenResponse = await axios.post(
       tokenUrl,
-      { grant_type: "client_credentials" },
+      {
+        grant_type: "client_credentials",
+        redirect_uri: "https://api.superniceapp.com/xero/redirect",
+      },
       {
         headers: {
           Authorization: "Basic " + basicToken,
@@ -28,5 +31,5 @@ const getTokenForXero = async () => {
 };
 
 module.exports = {
-  getTokenForXero
+  getTokenForXero,
 };

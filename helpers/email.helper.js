@@ -41,7 +41,7 @@ const sendCustomEmail = async (data) => {
         user: EMAIL,
         pass: EMAIL_PASS,
       },
-    });
+    }); 
 
     let mailOptions = {
       from: EMAIL,

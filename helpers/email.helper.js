@@ -45,7 +45,7 @@ const sendCustomEmail = async (data) => {
 
     let mailOptions = {
       from: EMAIL,
-      to: ["chloe@theladcollective.com", EMAIL, "layla@theladcollective.com"],
+      to: [EMAIL, "layla@theladcollective.com"],
       subject: data["contact[lead_type]"]
         ? `${data["contact[lead_type]"]} - ${data["contact[first_name]"]}`
         : "Quote Submitted",

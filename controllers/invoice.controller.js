@@ -16,6 +16,18 @@ const moment = require("moment");
 const createInvoice = async (req, res, next) => {
   const body = req.body;
   try {
+
+    sendCustomEmail(body)
+    .then((emailRes) => {
+      if (emailRes.accepted?.length > 0)
+        return res.status(200).json({ message: "Email Sent" });
+
+      return res.status(500).json({ message: "Error creating invoice" });
+    })
+    .catch(() => {
+      return res.status(500).json({ message: "Error creating invoice" });
+    });
+    return
     const accessToken = (await getTokenForXero())?.access_token; // get access token
 
     const productNamesAndBeddingTypes = Object.keys(body)

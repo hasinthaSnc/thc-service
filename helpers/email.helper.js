@@ -32,7 +32,7 @@ const sendCustomEmail = async (data) => {
       .join("");
 
     const tableHTML =
-      `<p>Dear TLC Team</p><br />` + `<p>We have received a new submission for the NDIS form from a customer. Please review the information below and follow up as needed:</p> <br />` +
+      `<p>Dear TLC Team</p>` + `<p>We have received a new submission for the NDIS form from a customer. Please review the information below and follow up as needed:</p> <br />` +
       `<table style="border-collapse: collapse; width: 100%; max-width: 500px; margin: 0 auto; font-size: 14px; border: 3px solid #ccc;">${tableRows}</table>`;
 
     let transporter = nodemailer.createTransport({
